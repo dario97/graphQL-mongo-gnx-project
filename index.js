@@ -6,7 +6,7 @@ const graphqlHTTP = require("express-graphql");
 
 const mongoose = require("mongoose");
 
-mongoose.plugin(require("./plugins/auditablePluginSchema"));
+mongoose.plugin(require("./plugins/auditablePluginsSchema"));
 
 mongoose
   .connect(
