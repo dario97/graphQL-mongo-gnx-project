@@ -1,9 +1,8 @@
 const gnx = require("@simtlix/gnx");
 const GNXError = gnx.GNXError;
-const moment = require("moment");
 const { Title } = require("../models/title");
 
-const ValidateTitleDates = {
+const CantBeTitlesOfAnEmployeeInTheSamePeriodOfTime = {
   validate: async function (typeName, originalObject, materializeObject) {
     const fromDateTitle = materializeObject.fromDate;
     const toDateTitle = materializeObject.toDate;
@@ -29,16 +28,21 @@ const ValidateTitleDates = {
         },
       ],
     });
+
     if (titleFinded) {
-      throw new TitleError(typeName);
+      throw new CantBeTitlesOfAnEmployeeInTheSamePeriodOfTimeError(typeName);
     }
   },
 };
 
-class TitleError extends GNXError {
+class CantBeTitlesOfAnEmployeeInTheSamePeriodOfTimeError extends GNXError {
   constructor(typeName) {
-    super(typeName, "TitleError", "TitleError");
+    super(
+      typeName,
+      "there are cannot be titles of the same employee in the same period of time.",
+      "CantBeTitlesOfAnEmployeeInTheSamePeriodOfTimeError"
+    );
   }
 }
 
-module.exports = { ValidateTitleDates };
+module.exports = { CantBeTitlesOfAnEmployeeInTheSamePeriodOfTime };

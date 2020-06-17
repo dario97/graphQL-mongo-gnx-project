@@ -14,14 +14,23 @@ const { GraphQLObjectType, GraphQLID } = graphql;
 const { GraphQLDate } = require("graphql-iso-date");
 
 const { ValidateDates } = require("../validators/common.validators");
+const {
+  AnEmployeeCantBeInMultipleDepartmentsAtTheSameTime,
+} = require("../validators/deptEmployee.validator");
 
 const DepartmentEmployeeType = new GraphQLObjectType({
   name: "DepartmentEmployeeType",
   description: "Represent the relation between an employee and a department",
   extensions: {
     validations: {
-      CREATE: [ValidateDates],
-      UPDATE: [ValidateDates],
+      CREATE: [
+        ValidateDates,
+        AnEmployeeCantBeInMultipleDepartmentsAtTheSameTime,
+      ],
+      UPDATE: [
+        ValidateDates,
+        AnEmployeeCantBeInMultipleDepartmentsAtTheSameTime,
+      ],
     },
   },
   fields: () =>

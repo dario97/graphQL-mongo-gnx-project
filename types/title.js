@@ -15,15 +15,17 @@ const { Employee } = require("../models/employee");
 const { Title } = require("../models/title");
 
 const { ValidateDates } = require("../validators/common.validators");
-const { ValidateTitleDates } = require("../validators/title.validator");
+const {
+  CantBeTitlesOfAnEmployeeInTheSamePeriodOfTime,
+} = require("../validators/title.validator");
 
 const TitleType = new GraphQLObjectType({
   name: "TitleType",
   description: "Represent titles",
   extensions: {
     validations: {
-      CREATE: [ValidateDates, ValidateTitleDates],
-      UPDATE: [ValidateDates, ValidateTitleDates],
+      CREATE: [ValidateDates, CantBeTitlesOfAnEmployeeInTheSamePeriodOfTime],
+      UPDATE: [ValidateDates, CantBeTitlesOfAnEmployeeInTheSamePeriodOfTime],
     },
   },
   fields: () =>
