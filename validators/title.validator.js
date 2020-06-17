@@ -14,14 +14,14 @@ const CantBeTitlesOfAnEmployeeInTheSamePeriodOfTime = {
           $or: [
             {
               $and: [
-                { fromDate: { $lt: fromDateTitle } },
-                { toDate: { $gt: fromDateTitle } },
+                { fromDate: { $lte: fromDateTitle } },
+                { toDate: { $gte: fromDateTitle } },
               ],
             },
             {
               $and: [
-                { fromDate: { $lt: toDateTitle } },
-                { toDate: { $gt: toDateTitle } },
+                { fromDate: { $lte: toDateTitle } },
+                { toDate: { $gte: toDateTitle } },
               ],
             },
           ],
