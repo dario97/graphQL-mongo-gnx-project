@@ -14,14 +14,14 @@ const AMangerCantBeManagerOfMultipleDepartmentsAtTheSameTime = {
           $or: [
             {
               $and: [
-                { fromDate: { $lt: fromDateDeptManager } },
-                { toDate: { $gt: fromDateDeptManager } },
+                { fromDate: { $lte: fromDateDeptManager } },
+                { toDate: { $gte: fromDateDeptManager } },
               ],
             },
             {
               $and: [
-                { fromDate: { $lt: toDateDeptManager } },
-                { toDate: { $gt: toDateDeptManager } },
+                { fromDate: { $lte: toDateDeptManager } },
+                { toDate: { $gte: toDateDeptManager } },
               ],
             },
           ],

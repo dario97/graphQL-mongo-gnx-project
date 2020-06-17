@@ -14,14 +14,14 @@ const AnEmployeeCantBeInMultipleDepartmentsAtTheSameTime = {
           $or: [
             {
               $and: [
-                { fromDate: { $lt: fromDateDeptEmployee } },
-                { toDate: { $gt: fromDateDeptEmployee } },
+                { fromDate: { $lte: fromDateDeptEmployee } },
+                { toDate: { $gte: fromDateDeptEmployee } },
               ],
             },
             {
               $and: [
-                { fromDate: { $lt: toDateDeptEmployee } },
-                { toDate: { $gt: toDateDeptEmployee } },
+                { fromDate: { $lte: toDateDeptEmployee } },
+                { toDate: { $gte: toDateDeptEmployee } },
               ],
             },
           ],

@@ -14,15 +14,18 @@ const EmployeeType = require("./employee");
 const { Employee } = require("../models/employee");
 const { Salary } = require("../models/salary");
 
-const { ValidateDates } = require("../validators/common.validators");
+const {
+  ValidateDates,
+  EmployeeMustBeExists,
+} = require("../validators/common.validators");
 
 const SalaryType = new GraphQLObjectType({
   name: "SalaryType",
   description: "Represent salaries",
   extensions: {
     validations: {
-      CREATE: [ValidateDates],
-      UPDATE: [ValidateDates],
+      CREATE: [ValidateDates, EmployeeMustBeExists],
+      UPDATE: [ValidateDates, EmployeeMustBeExists],
     },
   },
   fields: () =>
