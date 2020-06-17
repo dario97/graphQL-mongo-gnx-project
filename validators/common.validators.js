@@ -16,7 +16,9 @@ const ValidateDates = {
 
 const EmployeeMustBeExists = {
   validate: async function (typeName, originalObject, materializeObject) {
-    const exists = Employee.exists({ id: materializeObject.employeeId });
+    const exists = await Employee.exists({
+      _id: materializeObject.employeeId,
+    });
     if (!exists) {
       throw new EmployeeNotExistsError(typeName);
     }
@@ -25,7 +27,9 @@ const EmployeeMustBeExists = {
 
 const DepartmentMustBeExists = {
   validate: async function (typeName, originalObject, materializeObject) {
-    const exists = Department.exists({ id: materializeObject.departmentId });
+    const exists = await Department.exists({
+      _id: materializeObject.departmentId,
+    });
     if (!exists) {
       throw new DepartmentNotExistsError(typeName);
     }
